@@ -1,5 +1,7 @@
 FROM golang:1.19.2-alpine3.16
 
+LABEL org.opencontainers.image.source="https://github.com/PascalRoose/elite1337bot"
+
 ENV TGBOT_TOKEN "insert-token-here"
 
 WORKDIR /usr/src/app
