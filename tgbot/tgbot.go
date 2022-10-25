@@ -1,12 +1,12 @@
 package tgbot
 
 import (
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"log"
 	"time"
 
-	"github.com/go-telegram-bot-api/telegram-bot-api"
-	"github.com/hfurubotten/eleetbot/tgbot/commands"
-	"github.com/hfurubotten/eleetbot/tgbot/items"
+	"github.com/pascalroose/elite1337bot/tgbot/commands"
+	"github.com/pascalroose/elite1337bot/tgbot/items"
 )
 
 // TelegramBot is the main TG chat object for a bot.
@@ -45,19 +45,15 @@ func (tg *TelegramBot) Start() error {
 	}
 
 	go func() {
-		//defer func() {
-		//	if r := recover(); r != nil {
-		//		log.Println("Recovered from panic: ", r)
-		//		tg.Start()
-		//	}
-		//}()
-
 		for _, handler := range commands.StandardCommandHandlers {
 			handler.SetBotAPI(tg.Bot)
 		}
 
 		for update := range updates {
-			log.Printf("[%s] in %s: %s", update.Message.From.UserName, update.Message.Chat.Title, update.Message.Text)
+			if update.Message == nil {
+				continue
+			}
+			log.Printf("[%s] in %s", update.Message.From.UserName, update.Message.Chat.Title)
 
 			chat, err := items.NewChat(update.Message.Chat)
 			if err != nil {

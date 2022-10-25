@@ -2,11 +2,11 @@ package commands
 
 import (
 	"fmt"
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"strings"
 	"time"
 
-	"github.com/go-telegram-bot-api/telegram-bot-api"
-	"github.com/hfurubotten/eleetbot/tgbot/items"
+	"github.com/pascalroose/elite1337bot/tgbot/items"
 )
 
 // LeetCommand will handle a 1337 message from a chat.
@@ -36,7 +36,7 @@ func (lc *LeetCommand) Execute(update *tgbotapi.Update) error {
 		return err
 	}
 
-	user, err := items.NewUser(update.Message.From)
+	user, err := items.NewUser(*update.Message.From)
 	if err != nil {
 		return err
 	}

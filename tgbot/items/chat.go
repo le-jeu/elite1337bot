@@ -7,7 +7,7 @@ import (
 	"github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
-var chats = make(map[int]*Chat)
+var chats = make(map[int64]*Chat)
 
 // Chat reperesent a chat in TG for the server, and stores relevant information about it.
 type Chat struct {
@@ -25,13 +25,13 @@ type Chat struct {
 }
 
 // NewChat will create a new chat object from an api data object.
-func NewChat(apichat tgbotapi.Chat) (*Chat, error) {
+func NewChat(apichat *tgbotapi.Chat) (*Chat, error) {
 	if chat, ok := chats[apichat.ID]; ok {
 		return chat, nil
 	}
 
 	val := &Chat{
-		Chat:           apichat,
+		Chat:           *apichat,
 		Token:          "",
 		ScoreBoard:     make(map[int]int64),
 		scoreBoardLock: &sync.Mutex{},
@@ -164,15 +164,4 @@ func (c *Chat) checkScoreboardReset() {
 		c.scoreBoardTackingMonth = time.Now().Month()
 		c.ScoreBoardMonth = make(map[int]int64)
 	}
-}
-
-// ForEachChat will run a function for each chat registered.
-func ForEachChat(handler func(key int, chat *Chat) error) (err error) {
-	for id, val := range chats {
-		err = handler(id, val)
-		if err != nil {
-			return err
-		}
-	}
-	return nil
 }
