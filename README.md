@@ -1,7 +1,7 @@
 # 1337 telegram bot
 
 [![GitHub Actions - Test](https://github.com/pascalroose/elite1337bot/actions/workflows/test.yaml/badge.svg)](https://github.com/PascalRoose/elite1337bot/actions/workflows/test.yaml)
-[![GitHub Actions - Publish](https://github.com/pascalroose/elite1337bot/actions/workflows/publish.yaml/badge.svg)](https://github.com/PascalRoose/elite1337bot/actions/workflows/build.yaml)
+[![GitHub Actions - Publish](https://github.com/pascalroose/elite1337bot/actions/workflows/publish.yaml/badge.svg)](https://github.com/PascalRoose/elite1337bot/actions/workflows/publish.yaml)
 [![Telegram bot](https://img.shields.io/badge/Telegram%20bot-elite1337-blue.svg)](https://t.me/elite1337bot)
 
 Telegram bot for providing a 1337 (leet) scoreboard for chats. 
