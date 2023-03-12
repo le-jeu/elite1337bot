@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/go-telegram-bot-api/telegram-bot-api"
-	"github.com/pascalroose/elite1337bot/tgbot/items"
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
+	"github.com/le-jeu/elite1337bot/tgbot/items"
 )
 
 const (
@@ -31,17 +31,18 @@ func (sc *StatsCommand) SetBotAPI(bot *tgbotapi.BotAPI) {
 
 // IsCommandMatch will check if the message string contains 1337.
 func (sc *StatsCommand) IsCommandMatch(update *tgbotapi.Update) bool {
-	return strings.HasPrefix(strings.ToLower(update.Message.Text), "/stats")
+	return update.Message.IsCommand() && strings.ToLower(update.Message.Command()) == "stats"
 }
 
 // PreProcessText will remove the actuall command text from the message.
 func (sc *StatsCommand) PreProcessText(update *tgbotapi.Update) error {
-	sc.fullstats = strings.Contains(strings.ToLower(update.Message.Text), "full") ||
-		strings.Contains(strings.ToLower(update.Message.Text), "all")
+	arguments := strings.ToLower(update.Message.CommandArguments())
+	sc.fullstats = strings.Contains(arguments, "full") ||
+		strings.Contains(arguments, "all")
 
-	if strings.Contains(strings.ToLower(update.Message.Text), "week") {
+	if strings.Contains(arguments, "week") {
 		sc.period = Week
-	} else if strings.Contains(strings.ToLower(update.Message.Text), "month") {
+	} else if strings.Contains(arguments, "month") {
 		sc.period = Month
 	} else {
 		sc.period = Day

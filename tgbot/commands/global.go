@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/go-telegram-bot-api/telegram-bot-api"
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
 // GlobalCommand will handle a /global command from a chat, and give back the global scoreboard.
@@ -20,7 +20,7 @@ func (gc *GlobalCommand) SetBotAPI(bot *tgbotapi.BotAPI) {
 
 // IsCommandMatch will check if the message string contains an help command.
 func (gc *GlobalCommand) IsCommandMatch(update *tgbotapi.Update) bool {
-	return strings.HasPrefix(strings.ToLower(update.Message.Text), "/global")
+	return update.Message.IsCommand() && strings.ToLower(update.Message.Command()) == "global"
 }
 
 // PreProcessText does nothing to the message as its not used.

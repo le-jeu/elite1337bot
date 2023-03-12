@@ -2,11 +2,12 @@ package commands
 
 import (
 	"fmt"
-	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"strings"
 	"time"
 
-	"github.com/pascalroose/elite1337bot/tgbot/items"
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
+
+	"github.com/le-jeu/elite1337bot/tgbot/items"
 )
 
 // LeetCommand will handle a 1337 message from a chat.

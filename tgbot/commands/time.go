@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/go-telegram-bot-api/telegram-bot-api"
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
 // TimeCommand will handle a /time command from a chat, and print back the current server time.
@@ -20,7 +20,7 @@ func (hc *TimeCommand) SetBotAPI(bot *tgbotapi.BotAPI) {
 
 // IsCommandMatch will check if the message string contains an help command.
 func (hc *TimeCommand) IsCommandMatch(update *tgbotapi.Update) bool {
-	return strings.HasPrefix(strings.ToLower(update.Message.Text), "/time")
+	return update.Message.IsCommand() && strings.ToLower(update.Message.Command()) == "time"
 }
 
 // PreProcessText does nothing to the message as its not used.

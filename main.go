@@ -5,7 +5,7 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/pascalroose/elite1337bot/tgbot"
+	"github.com/le-jeu/elite1337bot/tgbot"
 )
 
 func main() {

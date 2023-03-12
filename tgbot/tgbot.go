@@ -1,12 +1,13 @@
 package tgbot
 
 import (
-	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"log"
 	"time"
 
-	"github.com/pascalroose/elite1337bot/tgbot/commands"
-	"github.com/pascalroose/elite1337bot/tgbot/items"
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
+
+	"github.com/le-jeu/elite1337bot/tgbot/commands"
+	"github.com/le-jeu/elite1337bot/tgbot/items"
 )
 
 // TelegramBot is the main TG chat object for a bot.
@@ -53,7 +54,7 @@ func (tg *TelegramBot) Start() error {
 			if update.Message == nil {
 				continue
 			}
-			log.Printf("[%s] in %s", update.Message.From.UserName, update.Message.Chat.Title)
+			log.Printf("[%s] in %s\n", update.Message.From.UserName, update.Message.Chat.Title)
 
 			chat, err := items.NewChat(update.Message.Chat)
 			if err != nil {

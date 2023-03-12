@@ -1,4 +1,4 @@
-module github.com/pascalroose/elite1337bot
+module github.com/le-jeu/elite1337bot
 
 go 1.19
 

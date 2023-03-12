@@ -3,7 +3,7 @@ package commands
 import (
 	"strings"
 
-	"github.com/go-telegram-bot-api/telegram-bot-api"
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
 // MentionedCommand will handle a message where the bot is mentioned.
@@ -18,7 +18,7 @@ func (mc *MentionedCommand) SetBotAPI(bot *tgbotapi.BotAPI) {
 
 // IsCommandMatch will check if the message string contains 1337.
 func (mc *MentionedCommand) IsCommandMatch(update *tgbotapi.Update) bool {
-	return strings.Contains(update.Message.Text, "@elitetimebot")
+	return strings.Contains(update.Message.Text, mc.bot.Self.UserName)
 }
 
 // PreProcessText will remove the actuall command text from the message.

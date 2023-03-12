@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/go-telegram-bot-api/telegram-bot-api"
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
 // EchoCommand will handle a /echo command from a chat. It process the incomming
@@ -21,22 +21,17 @@ func (ec *EchoCommand) SetBotAPI(bot *tgbotapi.BotAPI) {
 
 // IsCommandMatch will check if the message string contains an echo command.
 func (ec *EchoCommand) IsCommandMatch(update *tgbotapi.Update) bool {
-	return strings.HasPrefix(strings.ToLower(update.Message.Text), "/echo")
+	return update.Message.IsCommand() && strings.ToLower(update.Message.Command()) == "echo"
 }
 
 // PreProcessText will remove the actuall command text from the message.
 func (ec *EchoCommand) PreProcessText(update *tgbotapi.Update) error {
-	update.Message.Text = strings.Replace(update.Message.Text, "/echo ", "", 1)
-	update.Message.Text = strings.Replace(update.Message.Text, "/Echo ", "", 1)
-	update.Message.Text = strings.Replace(update.Message.Text, "/echo@elitetimebot ", "", 1)
-	update.Message.Text = strings.Replace(update.Message.Text, "/Echo@elitetimebot ", "", 1)
-
 	return nil
 }
 
 // Execute will run the echo command towards the chat where the command was posted.
 func (ec *EchoCommand) Execute(update *tgbotapi.Update) error {
-	echomsg := update.Message.Text
+	echomsg := update.Message.CommandArguments()
 
 	if (strings.Contains(strings.ToLower(echomsg), "i am") ||
 		strings.Contains(strings.ToLower(echomsg), "im") ||

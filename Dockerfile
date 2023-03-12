@@ -1,6 +1,6 @@
 FROM golang:1.19.2-alpine3.16
 
-LABEL org.opencontainers.image.source="https://github.com/PascalRoose/elite1337bot"
+LABEL org.opencontainers.image.source="https://github.com/le-jeu/elite1337bot"
 
 ENV TZ "Europe/Brussels"
 ENV TGBOT_TOKEN "insert-token-here"
