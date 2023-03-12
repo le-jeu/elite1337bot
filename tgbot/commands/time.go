@@ -31,7 +31,7 @@ func (hc *TimeCommand) PreProcessText(update *tgbotapi.Update) error {
 // Execute will run the help command towards the chat where the command was posted.
 func (hc *TimeCommand) Execute(update *tgbotapi.Update) error {
 	hour, min, sec := time.Now().Clock()
-	timestring := fmt.Sprintf("%d:%d:%d", hour, min, sec)
+	timestring := fmt.Sprintf("%02d:%02d:%02d", hour, min, sec)
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, timestring)
 	_, err := hc.bot.Send(msg)
 
